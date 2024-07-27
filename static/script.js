@@ -1,11 +1,14 @@
 document.getElementById('scan-button').addEventListener('click', () => {
-    document.getElementById('image-input').capture = 'environment';
-    document.getElementById('image-input').click();
+    const imageInput = document.getElementById('image-input');
+    imageInput.removeAttribute('capture'); // Ensure capture attribute is removed
+    imageInput.setAttribute('capture', 'environment'); // Set capture to environment
+    imageInput.click();
 });
 
 document.getElementById('choose-file-button').addEventListener('click', () => {
-    document.getElementById('image-input').capture = '';
-    document.getElementById('image-input').click();
+    const imageInput = document.getElementById('image-input');
+    imageInput.removeAttribute('capture'); // Ensure capture attribute is removed
+    imageInput.click();
 });
 
 document.getElementById('image-input').addEventListener('change', (event) => {
