@@ -15,8 +15,8 @@ def upload_image():
     data = request.get_json()
     image_data = base64.b64decode(data['image'])
     image = Image.open(io.BytesIO(image_data))
-    # Here you will process the image with your AI model
-    recognized_text = "Recognized text here"  # Placeholder
+    # Placeholder for image processing and AI model
+    recognized_text = "Recognized text here"  # Replace with actual text recognition logic
     return jsonify({'text': recognized_text})
 
 if __name__ == '__main__':
