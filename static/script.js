@@ -1,4 +1,10 @@
 document.getElementById('scan-button').addEventListener('click', () => {
+    document.getElementById('image-input').capture = 'environment';
+    document.getElementById('image-input').click();
+});
+
+document.getElementById('choose-file-button').addEventListener('click', () => {
+    document.getElementById('image-input').capture = '';
     document.getElementById('image-input').click();
 });
 
