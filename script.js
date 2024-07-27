@@ -7,27 +7,20 @@ document.getElementById('image-input').addEventListener('change', (event) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = () => {
-            const image = new Image();
-            image.src = reader.result;
-            document.getElementById('output').appendChild(image);
-            // Here you will send the image to the backend for processing
-        };
-        reader.readAsDataURL(file);
-    }
-});
-document.getElementById('scan-button').addEventListener('click', () => {
-    document.getElementById('image-input').click();
-});
-
-document.getElementById('image-input').addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-            const image = new Image();
-            image.src = reader.result;
-            document.getElementById('output').appendChild(image);
-            // Here you will send the image to the backend for processing
+            const imageBase64 = reader.result.split(',')[1];
+            fetch('/upload', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: imageBase64 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = `<p>${data.text}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
         };
         reader.readAsDataURL(file);
     }
