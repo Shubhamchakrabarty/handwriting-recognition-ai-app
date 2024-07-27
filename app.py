@@ -1,9 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from PIL import Image
 import io
 import base64
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
+
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
